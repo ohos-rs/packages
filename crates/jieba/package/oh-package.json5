@@ -1,0 +1,10 @@
+{
+  license: "MIT",
+  author: "southorange0929",
+  name: "@ohos-rs/jieba",
+  description: "jieba package for HarmonyOS,powered by ohos-rs.",
+  main: "index.ets",
+  version: "0.0.2",
+  repository: "https://github.com/ohos-rs/packages.git",
+  types: "libs/index.d.ts"
+}

@@ -76,7 +76,7 @@ impl Task for Enc {
         } else {
             env.create_buffer_with_data(output)
         }
-            .map(|b| b.into_raw())
+        .map(|b| b.into_raw())
     }
 
     fn finally(&mut self, env: Env) -> Result<()> {
