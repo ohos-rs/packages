@@ -1,0 +1,10 @@
+{
+  license: "MIT",
+  author: "southorange0929",
+  name: "@ohos-rs/snappy",
+  description: "Fastest Snappy compression library in OpenHarmony, powered by ohos-rs and rust-snappy.",
+  main: "index.ets",
+  version: "0.0.1",
+  repository: "https://github.com/ohos-rs/crc32-ohos.git",
+  types: "libs/index.d.ts"
+}
