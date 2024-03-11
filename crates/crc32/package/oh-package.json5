@@ -1,0 +1,10 @@
+{
+  license: "MIT",
+  author: "southorange0929",
+  name: "@ohos-rs/crc32",
+  description: "Fastest `crc32` implement for HarmonyOS,powered by ohos-rs.",
+  main: "index.ets",
+  version: "0.0.2",
+  repository: "https://github.com/ohos-rs/packages.git",
+  types: "libs/index.d.ts"
+}

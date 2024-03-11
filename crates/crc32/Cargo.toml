@@ -1,5 +1,5 @@
 [package]
-name    = "crc32"
+name = "crc32"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,8 +9,11 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-napi-ohos        = { version = "*" }
+napi-ohos = { version = "*" }
 napi-derive-ohos = { version = "*" }
+crc32c = { version = "0.6" }
+crc32fast = { version = "1.4", features = ["nightly"] }
+global-alloc = { workspace = true }
 
 [build-dependencies]
 napi-build-ohos = { version = "*" }

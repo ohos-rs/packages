@@ -1,9 +1,8 @@
 #![deny(clippy::all)]
 #![allow(clippy::nonstandard_macro_braces)]
 
-#[cfg(not(all(target_os = "linux", target_env = "musl", target_arch = "aarch64")))]
-#[global_allocator]
-static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+/// Explicit extern crate to use allocator.
+extern crate global_alloc;
 
 use std::str;
 
