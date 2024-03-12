@@ -7,8 +7,8 @@ extern crate global_alloc;
 use std::str;
 
 use jieba_rs::{Jieba, KeywordExtract, TFIDF};
-use napi_ohos::bindgen_prelude::*;
 use napi_derive_ohos::*;
+use napi_ohos::bindgen_prelude::*;
 use once_cell::sync::OnceCell;
 
 static JIEBA: OnceCell<Jieba> = OnceCell::new();

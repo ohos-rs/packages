@@ -5,8 +5,8 @@ extern crate global_alloc;
 
 use crc32c::crc32c_append;
 use crc32fast::Hasher;
-use napi_ohos::{bindgen_prelude::Either, JsBuffer, Result};
 use napi_derive_ohos::*;
+use napi_ohos::{bindgen_prelude::Either, JsBuffer, Result};
 
 #[napi(js_name = "crc32c")]
 pub fn crc32c(input: Either<String, JsBuffer>, initial_state: Option<u32>) -> Result<u32> {
