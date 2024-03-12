@@ -1,5 +1,5 @@
 [package]
-name    = "snappy"
+name = "snappy"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,7 +9,7 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-napi-ohos        = { version = "*" }
+napi-ohos = { version = "*" }
 napi-derive-ohos = { version = "*" }
 snap = "1"
 

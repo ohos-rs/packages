@@ -1,0 +1,4 @@
+include = ["Cargo.toml", "crates/*/*.toml", "alloc/*.toml", ".taplo.toml"]
+
+[formatting]
+column_width = 120
