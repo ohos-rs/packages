@@ -11,6 +11,9 @@ crate-type = ["cdylib"]
 [dependencies]
 napi-ohos        = { version = "*" }
 napi-derive-ohos = { version = "*" }
+argon2 = { version = "0.5", features = ["rand"] }
+rand_core = { version = "0.6", features = ["getrandom"] }
+global-alloc = {workspace = true}
 
 [build-dependencies]
 napi-build-ohos = { version = "*" }

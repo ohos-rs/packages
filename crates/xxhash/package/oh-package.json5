@@ -1,0 +1,10 @@
+{
+  license: "MIT",
+  author: "southorange0929",
+  name: "@ohos-rs/xxhash",
+  description: "Fastest xxhash implementation in OpenHarmony",
+  main: "index.ets",
+  version: "0.0.1",
+  repository: "https://github.com/ohos-rs/packages.git",
+  types: "libs/index.d.ts"
+}

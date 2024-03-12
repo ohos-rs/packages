@@ -1,5 +1,5 @@
 [package]
-name    = "xxhash"
+name = "xxhash"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,8 +9,10 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-napi-ohos        = { version = "*" }
+napi-ohos = { version = "*" }
 napi-derive-ohos = { version = "*" }
+xxhash-rust = { version = "0.8", features = ["xxh32", "xxh64", "xxh3"] }
+global-alloc = { workspace = true }
 
 [build-dependencies]
 napi-build-ohos = { version = "*" }

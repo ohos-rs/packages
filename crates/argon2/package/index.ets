@@ -1,0 +1,1 @@
+export * from "libargon2.so";
