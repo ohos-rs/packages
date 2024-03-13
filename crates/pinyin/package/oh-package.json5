@@ -1,0 +1,23 @@
+{
+  license: "MIT",
+  author: "southorange0929",
+  name: "@ohos-rs/pinyin",
+  description: "Fastest Chinese words to pinyin library for OpenHarmony.",
+  main: "index.ets",
+  version: "0.0.1",
+  repository: "https://github.com/ohos-rs/packages.git",
+  types: "libs/index.d.ts",
+  keywords: [
+    "ohos-rs",
+    "NAPI",
+    "N-API",
+    "Rust",
+    "node-addon",
+    "pinyin",
+    "jieba",
+    "拼音",
+    "汉字",
+    "中文"
+  ],
+  homepage: "https://ohos-rs.github.io/"
+}
