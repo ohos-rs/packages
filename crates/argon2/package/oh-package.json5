@@ -4,7 +4,20 @@
   name: "@ohos-rs/argon2",
   description: "RustCrypto: Argon2 binding for OpenHarmony",
   main: "index.ets",
-  version: "0.0.1",
+  version: "0.0.2",
   repository: "https://github.com/ohos-rs/packages.git",
-  types: "libs/index.d.ts"
+  types: "libs/index.d.ts",
+  dependencies: {},
+  keywords: [
+    "ohos-rs",
+    "NAPI",
+    "Rust",
+    "node-addon",
+    "argon2",
+    "argon2-password",
+    "crypto",
+    "password",
+    "hash",
+  ],
+  homepage: "https://ohos-rs.github.io/ecosystem/package/argon2.html"
 }
