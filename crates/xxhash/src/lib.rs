@@ -4,8 +4,8 @@
 /// Explicit extern crate to use allocator.
 extern crate global_alloc;
 
-use napi_ohos::bindgen_prelude::*;
 use napi_derive_ohos::napi;
+use napi_ohos::bindgen_prelude::*;
 use xxhash_rust::{xxh32, xxh64};
 
 #[napi]
@@ -96,8 +96,7 @@ impl Xxh64 {
 
     #[napi]
     pub fn reset(&mut self, new_state: Option<BigInt>) {
-        self
-            .inner
+        self.inner
             .reset(new_state.map(|b| b.get_u64().1).unwrap_or(0));
     }
 }

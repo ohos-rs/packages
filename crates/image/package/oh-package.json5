@@ -1,0 +1,21 @@
+{
+  license: "MIT",
+  author: "southorange0929",
+  name: "@ohos-rs/image",
+  description: "Image processing library for HarmonyOS,powered by ohos-rs.",
+  main: "index.ets",
+  version: "0.0.1",
+  repository: "https://github.com/ohos-rs/packages.git",
+  types: "libs/index.d.ts",
+  "keywords": [
+    "image",
+    "lossless",
+    "compression",
+    "jpeg",
+    "jpg",
+    "png",
+    "svg"
+  ],
+  dependencies: {},
+  homepage: "https://ohos-rs.github.io/"
+}
