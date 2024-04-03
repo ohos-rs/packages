@@ -4,7 +4,21 @@
   name: "@ohos-rs/snappy",
   description: "Fastest Snappy compression library in OpenHarmony, powered by ohos-rs and rust-snappy.",
   main: "index.ets",
-  version: "0.0.2",
+  version: "0.0.3",
   repository: "https://github.com/ohos-rs/packages.git",
-  types: "libs/index.d.ts"
+  types: "libs/index.d.ts",
+  dependencies: {},
+  keywords: [
+    "snappy",
+    "snap",
+    "compression",
+    "compress",
+    "ohos-rs",
+    "NAPI",
+    "N-API",
+    "Rust",
+    "Node-API",
+    "node-addon"
+  ],
+  homepage: "https://ohos-rs.github.io/ecosystem/package/snappy.html"
 }
