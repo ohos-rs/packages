@@ -24,10 +24,9 @@ It has a simple design aimed at the highest memory filling rate and effective us
       Hybrid that mixes Argon2i and Argon2d passes.
       Uses the Argon2i approach for the first half pass over memory and Argon2d approach for subsequent passes. This effectively places it in the “middle” between the other two: it doesn’t provide as good TMTO/GPU cracking resistance as Argon2d, nor as good of side-channel resistance as Argon2i, but overall provides the most well-rounded approach to both classes of attacks.
 
-> 1. 由于现行NDK中`napi_typeof`方法对于空参处理问题会导致默认参数不填参数报错，所以请填写对应的参数。
-> 2. @ohos.buffer表现跟Buffer不一致，优先建议使用string。
->
-> 等待官方问题修复即可
+> 1. Because of a problem in the current NDK where the napi_typeof method doesn't handle null arguments well, leaving default parameters unfilled will cause an error. Therefore, please fill in the appropriate parameters. If your ROM version is higher than `beta1`, you can disregard this.
+> 2. The behavior of @ohos.buffer is not consistent with Buffer, so it's suggested to prioritize using string.
+> 3. For AbortController, you can use [@ohos-rs/abort-controller](https://ohpm.openharmony.cn/#/cn/detail/@ohos-rs%2Fabort-controller). 
 
 ## Install
 

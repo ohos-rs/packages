@@ -139,14 +139,21 @@ impl Task for HashTask {
 }
 
 #[napi]
-pub fn hash(password: Either<String, Buffer>, options: Option<Options>) -> AsyncTask<HashTask> {
-    AsyncTask::new(HashTask {
-        password: match password {
-            Either::A(s) => s.as_bytes().to_vec(),
-            Either::B(b) => b.to_vec(),
+pub fn hash(
+    password: Either<String, Buffer>,
+    options: Option<Options>,
+    abort_signal: Option<AbortSignal>,
+) -> AsyncTask<HashTask> {
+    AsyncTask::with_optional_signal(
+        HashTask {
+            password: match password {
+                Either::A(s) => s.as_bytes().to_vec(),
+                Either::B(b) => b.to_vec(),
+            },
+            options: options.unwrap_or_default(),
         },
-        options: options.unwrap_or_default(),
-    })
+        abort_signal,
+    )
 }
 
 #[napi]
@@ -213,14 +220,18 @@ impl Task for RawHashTask {
 pub fn hash_raw(
     password: Either<String, Buffer>,
     options: Option<Options>,
+    abort_signal: Option<AbortSignal>,
 ) -> AsyncTask<RawHashTask> {
-    AsyncTask::new(RawHashTask {
-        password: match password {
-            Either::A(s) => s.as_bytes().to_vec(),
-            Either::B(b) => b.to_vec(),
+    AsyncTask::with_optional_signal(
+        RawHashTask {
+            password: match password {
+                Either::A(s) => s.as_bytes().to_vec(),
+                Either::B(b) => b.to_vec(),
+            },
+            options: options.unwrap_or_default(),
         },
-        options: options.unwrap_or_default(),
-    })
+        abort_signal,
+    )
 }
 
 #[napi]
@@ -271,20 +282,24 @@ pub fn verify(
     hashed: Either<String, Buffer>,
     password: Either<String, Buffer>,
     options: Option<Options>,
+    abort_signal: Option<AbortSignal>,
 ) -> Result<AsyncTask<VerifyTask>> {
-    Ok(AsyncTask::new(VerifyTask {
-        password: match password {
-            Either::A(s) => s,
-            Either::B(b) => String::from_utf8(b.to_vec())
-                .map_err(|err| Error::new(Status::InvalidArg, format!("{err}")))?,
+    Ok(AsyncTask::with_optional_signal(
+        VerifyTask {
+            password: match password {
+                Either::A(s) => s,
+                Either::B(b) => String::from_utf8(b.to_vec())
+                    .map_err(|err| Error::new(Status::InvalidArg, format!("{err}")))?,
+            },
+            hashed: match hashed {
+                Either::A(s) => s,
+                Either::B(b) => String::from_utf8(b.to_vec())
+                    .map_err(|err| Error::new(Status::InvalidArg, format!("{err}")))?,
+            },
+            options: options.unwrap_or_default(),
         },
-        hashed: match hashed {
-            Either::A(s) => s,
-            Either::B(b) => String::from_utf8(b.to_vec())
-                .map_err(|err| Error::new(Status::InvalidArg, format!("{err}")))?,
-        },
-        options: options.unwrap_or_default(),
-    }))
+        abort_signal,
+    ))
 }
 
 #[napi]
