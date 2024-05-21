@@ -9,14 +9,14 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-napi-ohos = { version = "*" }
-napi-derive-ohos = { version = "*" }
+napi-ohos = { version = "1.0.0-beta.1" }
+napi-derive-ohos = { version = "1.0.0-beta.1" }
 crc32c = { version = "0.6" }
 crc32fast = { version = "1.4", features = ["nightly"] }
 global-alloc = { workspace = true }
 
 [build-dependencies]
-napi-build-ohos = { version = "*" }
+napi-build-ohos = { version = "1.0.0-beta.1" }
 
 [profile.release]
 lto = true
