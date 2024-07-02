@@ -48,11 +48,18 @@ pub fn gen_salt_js(round: u32, version: Option<String>) -> Result<AsyncTask<salt
 pub fn hash_sync(
     input: Either<String, Buffer>,
     cost: Option<u32>,
-    salt: Option<Buffer>,
+    salt: Option<Either<String, Buffer>>,
 ) -> Result<String> {
     let salt = if let Some(salt) = salt {
         let mut s = [0u8; 16];
-        s.copy_from_slice(salt.as_ref());
+        match salt {
+            Either::A(salt_str) => {
+                s.copy_from_slice(salt_str.as_bytes());
+            }
+            Either::B(salt_buf) => {
+                s.copy_from_slice(salt_buf.as_ref());
+            }
+        };
         s
     } else {
         gen_salt().map_err(|err| Error::new(Status::InvalidArg, format!("{err}")))?
@@ -67,11 +74,18 @@ pub fn hash_sync(
 pub fn hash(
     input: Either<String, JsBuffer>,
     cost: Option<u32>,
-    salt: Option<Buffer>,
+    salt: Option<Either<String,Buffer>>,
 ) -> Result<AsyncTask<HashTask>> {
     let salt = if let Some(salt) = salt {
         let mut s = [0u8; 16];
-        s.copy_from_slice(salt.as_ref());
+        match salt {
+            Either::A(salt_str) => {
+                s.copy_from_slice(salt_str.as_bytes());
+            }
+            Either::B(salt_buf) => {
+                s.copy_from_slice(salt_buf.as_ref());
+            }
+        };
         s
     } else {
         gen_salt().map_err(|err| Error::new(Status::InvalidArg, format!("{err}")))?
