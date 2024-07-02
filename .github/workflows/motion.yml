@@ -20,7 +20,7 @@ jobs:
       with:
         issue-number: ${{ github.event.issue.number }}
         body: |
-          @southorange0929 Please check this issue, thanks.
+          @richerfu Please check this issue, thanks.
 
     - name: pr mention user
       if: github.event_name == 'pull_request'
@@ -28,4 +28,4 @@ jobs:
       with:
         issue-number: ${{ github.event.pull_request.number }}
         body: |
-          @southorange0929 Please check this PR, thanks.
+          @richerfu Please check this PR, thanks.
