@@ -4,7 +4,19 @@
   name: "@ohos-rs/xxhash",
   description: "Fastest xxhash implementation in OpenHarmony",
   main: "index.ets",
-  version: "0.0.2",
+  version: "0.0.3",
   repository: "https://github.com/ohos-rs/packages.git",
-  types: "libs/index.d.ts"
+  dependencies: {},
+  types: "libs/index.d.ts",
+  keywords: [
+    "hash",
+    "xxhash",
+    "xxhashjs",
+    "Rust",
+    "node-rs",
+    "napi",
+    "napi-rs",
+    "N-API",
+    "Node-API"
+  ]
 }
