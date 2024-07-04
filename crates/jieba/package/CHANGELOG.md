@@ -1,3 +1,7 @@
+# 0.0.4
+- fix package 
+
+---
 # 0.0.3
 - fix package
 

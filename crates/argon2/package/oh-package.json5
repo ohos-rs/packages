@@ -4,7 +4,7 @@
   name: "@ohos-rs/argon2",
   description: "RustCrypto: Argon2 binding for OpenHarmony",
   main: "index.ets",
-  version: "0.1.1",
+  version: "0.1.2",
   repository: "https://github.com/ohos-rs/packages.git",
   types: "libs/index.d.ts",
   dependencies: {},
