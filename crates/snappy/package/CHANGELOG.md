@@ -1,4 +1,8 @@
-0.0.4
+# 0.0.5
+- fix package
+
+--- 
+# 0.0.4
 - fix: can't find __emutls_get_address symbol for some ROM
 
 ---

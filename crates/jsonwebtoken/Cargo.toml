@@ -9,8 +9,8 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-napi-ohos = { version = "*", default-features = false, features = ["ohos", "serde-json-ordered", "object_indexmap"] }
-napi-derive-ohos = { version = "*" }
+napi-ohos = { version = "1.0.0-beta.2", default-features = false, features = ["ohos", "serde-json-ordered", "object_indexmap"] }
+napi-derive-ohos = { version = "1.0.0-beta.2" }
 rand_core = { version = "0.6", features = ["std"] }
 serde = "1.0"
 serde_json = "1.0"
@@ -19,7 +19,7 @@ jsonwebtoken = { version = "9" }
 global-alloc = { workspace = true }
 
 [build-dependencies]
-napi-build-ohos = { version = "*" }
+napi-build-ohos = { version = "1.0.0-beta.2" }
 
 [profile.release]
 lto = true

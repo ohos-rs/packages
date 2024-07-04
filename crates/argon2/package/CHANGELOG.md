@@ -1,8 +1,10 @@
---- 
+# 0.1.1
+- fix package
+
+---
 # 0.1.0
 - Update Readme
 - Support AbortController
-
 
 --- 
 # 0.0.2
