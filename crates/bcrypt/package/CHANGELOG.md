@@ -1,3 +1,7 @@
+# 0.0.4
+- fix some error
+
+--- 
 # 0.0.3
 - fix package 
 
