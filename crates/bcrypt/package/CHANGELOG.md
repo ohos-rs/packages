@@ -1,3 +1,7 @@
+# 0.0.5
+- fix hash with short salt
+
+---
 # 0.0.4
 - fix some error
 

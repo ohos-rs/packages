@@ -4,7 +4,7 @@
   name: "@ohos-rs/bcrypt",
   description: "Rust bcrypt binding",
   main: "index.ets",
-  version: "0.0.4",
+  version: "0.0.5",
   dependencies: {},
   repository: "https://github.com/ohos-rs/packages.git",
   types: "libs/index.d.ts",
