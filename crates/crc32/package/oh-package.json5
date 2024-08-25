@@ -4,7 +4,8 @@
   name: "@ohos-rs/crc32",
   description: "Fastest `crc32` implement for HarmonyOS,powered by ohos-rs.",
   main: "index.ets",
-  version: "0.0.3",
+  version: "0.0.4",
   repository: "https://github.com/ohos-rs/packages.git",
-  types: "libs/index.d.ts"
+  types: "libs/index.d.ts",
+  dependencies: {}
 }

@@ -1,3 +1,8 @@
+# 0.0.5
+- fix .d.ts content with ArrayBuffer
+- upgrade napi-ohos version
+
+---
 # 0.0.4
 - fix package 
 

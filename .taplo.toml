@@ -1,4 +1,5 @@
-include = ["Cargo.toml", "crates/*/*.toml", "alloc/*.toml", ".taplo.toml"]
+include = ["Cargo.toml", "crates/**/*.toml", "alloc/*.toml", ".taplo.toml", "rust-toolchain.toml"]
 
 [formatting]
-column_width = 120
+align_entries = true
+column_width  = 120

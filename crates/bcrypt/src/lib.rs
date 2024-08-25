@@ -71,7 +71,7 @@ pub fn hash_sync(
 pub fn hash(
     input: Either<String, JsBuffer>,
     cost: Option<u32>,
-    salt: Option<Either<String,Buffer>>,
+    salt: Option<Either<String, Buffer>>,
 ) -> Result<AsyncTask<HashTask>> {
     let salt = if let Some(salt) = salt {
         let mut s = [0u8; 16];

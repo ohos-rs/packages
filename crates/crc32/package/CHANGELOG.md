@@ -1,3 +1,8 @@
+# 0.0.4
+- fix .d.ts content with ArrayBuffer
+- upgrade napi-ohos version
+
+---
 # 0.0.3
 - update to the latest SDK
 - adaptor package info

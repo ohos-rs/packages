@@ -1,5 +1,5 @@
 [package]
-name = "jsonwebtoken"
+name    = "jsonwebtoken"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,18 +9,18 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-napi-ohos = { version = "1.0.0-beta.2", default-features = false, features = ["ohos", "serde-json-ordered", "object_indexmap"] }
-napi-derive-ohos = { version = "1.0.0-beta.2" }
-rand_core = { version = "0.6", features = ["std"] }
-serde = "1.0"
-serde_json = "1.0"
-indexmap = { version = "2", features = ["serde"] }
-jsonwebtoken = { version = "9" }
-global-alloc = { workspace = true }
+napi-ohos        = { workspace = true, default-features = false, features = ["ohos", "serde-json-ordered", "object_indexmap"] }
+napi-derive-ohos = { workspace = true }
+rand_core        = { version = "0.6", features = ["std"] }
+serde            = "1.0"
+serde_json       = "1.0"
+indexmap         = { version = "2", features = ["serde"] }
+jsonwebtoken     = { version = "9" }
+global-alloc     = { workspace = true }
 
 [build-dependencies]
-napi-build-ohos = { version = "1.0.0-beta.2" }
+napi-build-ohos = { workspace = true }
 
 [profile.release]
-lto = true
+lto           = true
 codegen-units = 1

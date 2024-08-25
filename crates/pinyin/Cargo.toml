@@ -1,5 +1,5 @@
 [package]
-name = "pinyin"
+name    = "pinyin"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,17 +9,17 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-napi-ohos = { version = "1.0.0-beta.2" }
-napi-derive-ohos = { version = "1.0.0-beta.2" }
-once_cell = "1"
-pinyin = "0.10"
-rayon = "1"
-jieba-rs = "0.6"
-global-alloc = { workspace = true }
+napi-ohos        = { workspace = true }
+napi-derive-ohos = { workspace = true }
+once_cell        = "1"
+pinyin           = "0.10"
+rayon            = "1"
+jieba-rs         = "0.6"
+global-alloc     = { workspace = true }
 
 [build-dependencies]
-napi-build-ohos = { version = "1.0.0-beta.2" }
+napi-build-ohos = { workspace = true }
 
 [profile.release]
-lto = true
+lto           = true
 codegen-units = 1
