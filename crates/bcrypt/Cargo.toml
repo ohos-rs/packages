@@ -12,10 +12,10 @@ crate-type = ["cdylib"]
 napi-ohos        = { workspace = true }
 napi-derive-ohos = { workspace = true }
 base64           = { version = "0.22" }
-bcrypt           = "0.15"
+bcrypt           = "0.17"
 blowfish         = { version = "0.9", features = ["bcrypt"] }
-getrandom        = "0.2"
 global-alloc     = { workspace = true }
+rand             = "0.9"
 
 [build-dependencies]
 napi-build-ohos = { workspace = true }

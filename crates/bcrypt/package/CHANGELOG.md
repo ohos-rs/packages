@@ -1,3 +1,8 @@
+# 0.1.0
+- Upgrade `bcrypt`
+- Add format version for hash
+
+---
 # 0.0.6
 - fix .d.ts content with ArrayBuffer
 - upgrade napi-ohos version
