@@ -1,10 +1,10 @@
 {
   license: "MIT",
-  author: "southorange0929",
+  author: "richerfu",
   name: "@ohos-rs/bcrypt",
-  description: "Rust bcrypt binding",
+  description: "Rust bcrypt binding for OpenHarmony",
   main: "index.ets",
-  version: "0.0.6",
+  version: "0.1.0",
   dependencies: {},
   repository: "https://github.com/ohos-rs/packages.git",
   types: "libs/index.d.ts",

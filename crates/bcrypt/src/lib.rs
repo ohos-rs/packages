@@ -9,9 +9,7 @@ use std::cmp;
 use bcrypt::Version;
 use napi_derive_ohos::*;
 use napi_ohos::bindgen_prelude::*;
-use napi_ohos::{Error, JsBuffer, Result, Status};
 
-use crate::hash_task::AsyncHashInput;
 use crate::hash_task::HashTask;
 use crate::salt_task::{format_salt, gen_salt};
 use crate::verify_task::VerifyTask;
@@ -25,97 +23,85 @@ pub const DEFAULT_COST: u32 = 12;
 
 #[napi(ts_args_type = "round: number, version?: '2a' | '2x' | '2y' | '2b'")]
 pub fn gen_salt_sync(round: u32, version: Option<String>) -> Result<String> {
-    let salt = gen_salt().map_err(|err| {
-        Error::new(
-            Status::GenericFailure,
-            format!("Generate salt failed {err}"),
-        )
-    })?;
+    let salt = gen_salt();
     Ok(format_salt(round, &version_from_str(version)?, &salt))
 }
 
 #[napi(
     js_name = "genSalt",
-    ts_args_type = "round: number, version?: '2a' | '2x' | '2y' | '2b'"
+    ts_args_type = "round: number, version?: '2a' | '2x' | '2y' | '2b', signal?: AbortSignal"
 )]
-pub fn gen_salt_js(round: u32, version: Option<String>) -> Result<AsyncTask<salt_task::SaltTask>> {
+pub fn gen_salt_js(
+    round: u32,
+    version: Option<String>,
+    signal: Option<AbortSignal>,
+) -> Result<AsyncTask<salt_task::SaltTask>> {
     let task = salt_task::SaltTask {
         round,
         version: version_from_str(version)?,
     };
-    Ok(AsyncTask::new(task))
+    Ok(AsyncTask::with_optional_signal(task, signal))
 }
 
 #[napi]
+#[inline]
 pub fn hash_sync(
-    input: Either<String, Buffer>,
+    input: Either<String, &[u8]>,
     cost: Option<u32>,
-    salt: Option<Either<String, Buffer>>,
+    salt: Option<Either<String, &[u8]>>,
+    #[napi(ts_arg_type = "'2a' | '2x' | '2y' | '2b'")] version: Option<String>,
 ) -> Result<String> {
     let salt = if let Some(salt) = salt {
         let mut s = [0u8; 16];
-        let buf = either_string_buffer_as_bytes(&salt);
-        let copy_length = cmp::min(buf.len(), s.len());
-        s[..copy_length].copy_from_slice(&buf[..copy_length]);
-        s
-    } else {
-        gen_salt().map_err(|err| Error::new(Status::InvalidArg, format!("{err}")))?
-    };
-    match input {
-        Either::A(s) => HashTask::hash(s.as_bytes(), salt, cost.unwrap_or(DEFAULT_COST)),
-        Either::B(b) => HashTask::hash(b.as_ref(), salt, cost.unwrap_or(DEFAULT_COST)),
-    }
-}
-
-#[napi]
-pub fn hash(
-    input: Either<String, JsBuffer>,
-    cost: Option<u32>,
-    salt: Option<Either<String, Buffer>>,
-) -> Result<AsyncTask<HashTask>> {
-    let salt = if let Some(salt) = salt {
-        let mut s = [0u8; 16];
-        let buf = either_string_buffer_as_bytes(&salt);
+        let buf = salt.as_ref();
         // make sure salt buffer length should be 16
         let copy_length = cmp::min(buf.len(), s.len());
         s[..copy_length].copy_from_slice(&buf[..copy_length]);
         s
     } else {
-        gen_salt().map_err(|err| Error::new(Status::InvalidArg, format!("{err}")))?
+        rand::random()
     };
-    let task = HashTask::new(
-        AsyncHashInput::from_either(input)?,
-        cost.unwrap_or(DEFAULT_COST),
-        salt,
-    );
-    Ok(AsyncTask::new(task))
+    let version = version_from_str(version).ok();
+    HashTask::hash(input.as_ref(), salt, cost.unwrap_or(DEFAULT_COST), version)
 }
 
 #[napi]
-pub fn verify_sync(input: Either<String, Buffer>, hash: Either<String, Buffer>) -> Result<bool> {
-    let input = either_string_buffer_as_bytes(&input);
-    let hash = either_string_buffer_as_bytes(&hash);
-    VerifyTask::verify(input, hash)
+pub fn hash(
+    input: Either<Uint8Array, String>,
+    cost: Option<u32>,
+    salt: Option<Either<String, &[u8]>>,
+    #[napi(ts_arg_type = "'2a' | '2x' | '2y' | '2b'")] version: Option<String>,
+    signal: Option<AbortSignal>,
+) -> Result<AsyncTask<HashTask>> {
+    let salt = if let Some(salt) = salt {
+        let mut s = [0u8; 16];
+        let buf = salt.as_ref();
+        // make sure salt buffer length should be 16
+        let copy_length = cmp::min(buf.len(), s.len());
+        s[..copy_length].copy_from_slice(&buf[..copy_length]);
+        s
+    } else {
+        gen_salt()
+    };
+    let version = version_from_str(version).ok();
+    let task = HashTask::new(input, cost.unwrap_or(DEFAULT_COST), salt, version);
+    Ok(AsyncTask::with_optional_signal(task, signal))
 }
 
-#[inline(always)]
-fn either_string_buffer_as_bytes(input: &Either<String, Buffer>) -> &[u8] {
-    match input {
-        Either::A(s) => s.as_bytes(),
-        Either::B(b) => b.as_ref(),
-    }
+#[napi]
+#[inline]
+pub fn verify_sync(input: Either<String, &[u8]>, hash: Either<String, &[u8]>) -> Result<bool> {
+    VerifyTask::verify(input, hash)
 }
 
 #[napi]
 pub fn verify(
-    password: Either<String, JsBuffer>,
-    hash: Either<String, JsBuffer>,
+    password: Either<Uint8Array, String>,
+    hash: Either<Uint8Array, String>,
+    signal: Option<AbortSignal>,
 ) -> Result<AsyncTask<VerifyTask>> {
-    let task = VerifyTask::new(
-        AsyncHashInput::from_either(password)?,
-        AsyncHashInput::from_either(hash)?,
-    );
-    Ok(AsyncTask::new(task))
+    let task = VerifyTask::new(password, hash);
+    Ok(AsyncTask::with_optional_signal(task, signal))
 }
 
 #[inline]

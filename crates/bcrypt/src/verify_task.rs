@@ -1,17 +1,18 @@
 use std::str;
 
 use napi_derive_ohos::napi;
-use napi_ohos::{Env, Error, JsBoolean, Result, Status, Task};
-
-use crate::hash_task::AsyncHashInput;
+use napi_ohos::bindgen_prelude::*;
 
 pub struct VerifyTask {
-    password: AsyncHashInput,
-    hash: AsyncHashInput,
+    password: Either<Uint8Array, String>,
+    hash: Either<Uint8Array, String>,
 }
 
 impl VerifyTask {
-    pub fn new(password: AsyncHashInput, hash: AsyncHashInput) -> VerifyTask {
+    pub fn new(
+        password: Either<Uint8Array, String>,
+        hash: Either<Uint8Array, String>,
+    ) -> VerifyTask {
         Self { password, hash }
     }
 
@@ -33,23 +34,13 @@ impl VerifyTask {
 #[napi]
 impl Task for VerifyTask {
     type Output = bool;
-    type JsValue = JsBoolean;
+    type JsValue = bool;
 
     fn compute(&mut self) -> Result<Self::Output> {
         VerifyTask::verify(self.password.as_ref(), self.hash.as_ref())
     }
 
-    fn resolve(&mut self, env: Env, output: Self::Output) -> Result<Self::JsValue> {
-        env.get_boolean(output)
-    }
-
-    fn finally(&mut self, env: Env) -> Result<()> {
-        if let AsyncHashInput::Buffer(buf) = &mut self.password {
-            buf.unref(env)?;
-        }
-        if let AsyncHashInput::Buffer(buf) = &mut self.hash {
-            buf.unref(env)?;
-        }
-        Ok(())
+    fn resolve(&mut self, _: Env, output: Self::Output) -> Result<Self::JsValue> {
+        Ok(output)
     }
 }
